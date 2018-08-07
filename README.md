@@ -1,2 +1,0 @@
-# RobotToolChanger
-Tool changer project. 
