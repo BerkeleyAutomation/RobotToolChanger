@@ -57,6 +57,7 @@ def waitForString():
 		try:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			s.bind(('0.0.0.0', 8003))
+			continue
 			LED_STATE = 0
 			while True:
 				LED_STATE = 0
@@ -122,7 +123,7 @@ def main(args):
 	wait_for_string_thread.start()
 
 	while True:
-		motorCtl.ChangeDutyCycle(motorSpeed)
+		motorCtl.ChangeDutyCycle(10)
 
 		if motorDir==0:
 			GPIO.output(motorDir1Pin, GPIO.HIGH)
