@@ -57,7 +57,7 @@ def waitForString():
 		try:
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 			s.bind(('0.0.0.0', 8003))
-			continue
+			
 			LED_STATE = 0
 			while True:
 				LED_STATE = 0
