@@ -8,10 +8,8 @@ import RPi.GPIO as GPIO
 import numpy as np
 
 LED_STATE=0 #0-waiting consnt; 1-sending image
-
-LED1 = 100
-LED2 = 100
-LED3 = 100
+motorSpeed = 0
+motorDir = 0
 
 def controlLED():
 	global LED_STATE
@@ -51,9 +49,9 @@ def LED_const(pin):
 
 def waitForString():
 	global LED_STATE
-	global LED1, LED2, LED3
-
-	#data = 'setSpeed_005'
+	global motorSpeed
+	global motorDir
+	#data = 'setSpeed_000_040' first arg is motor direction (000-->CW, 001-->CCW) second arg is motor speed
 
 	while True:
 		try:
@@ -72,17 +70,15 @@ def waitForString():
 					if data[0:8] == 'setSpeed':
 						try:
 							LED_STATE = 1
-							LED1 = np.int(data[9:12])
-							LED2 = np.int(data[13:16])
-							LED3 = np.int(data[17:20])
-							print(LED1, LED2, LED3)
+							motorDir = np.int(data[9:12])
+							motorSpeed = np.int(data[13:16])
+							print(motorDir, motorSpeed)
 							time.sleep(0.1)
 						except:
 							LED_STATE = 0
-							LED1 = 0
-							LED2 = 0
-							LED3 = 0
-							print('String format error. Currect format is: setLight_004_050_100')
+							motorDir = 0
+							motorSpeed = 0
+							print('String format error. Currect format is: setSpeed_000_045')
 							time.sleep(0.1)
 				conn.close()
 		except:
@@ -91,35 +87,33 @@ def waitForString():
 
 def main(args):
 	global LED_STATE
-	global LED1, LED2, LED3
+	global motorSpeed
+	global motorDir
 
 	LED_STATE = 0
-	LED1 = 0
-	LED2 = 0
-	LED3 = 0
+	motorSpeed = 0
+	motorDir = 0
 
-	LED1Pin = 35
-	LED2Pin = 33
-	LED3Pin = 12
+	motorPWMPin = 35
+	motorDir1Pin = 31
+	motorDir2Pin = 29
 
 	GPIO.setmode(GPIO.BOARD)
-	GPIO.setup(LED1Pin, GPIO.OUT)
-	GPIO.setup(LED2Pin, GPIO.OUT)
-	GPIO.setup(LED3Pin, GPIO.OUT)
+	GPIO.setup(motorPWMPin, GPIO.OUT)
+	GPIO.setup(motorDir1Pin, GPIO.OUT)
+	GPIO.setup(motorDir2Pin, GPIO.OUT)
 
-	LED1Ctl = GPIO.PWM(LED1Pin, 100)
-	LED2Ctl = GPIO.PWM(LED2Pin, 100)
-	LED3Ctl = GPIO.PWM(LED3Pin, 100)
+	#set dir
+	GPIO.output(motorDir1Pin, GPIO.HIGH)
+	GPIO.output(motorDir2Pin, GPIO.LOW)
 
-	LED1Ctl.start(LED1)
-	LED2Ctl.start(LED2)
-	LED3Ctl.start(LED3)
-	
-	LED1Ctl.ChangeDutyCycle(0)
-	LED2Ctl.ChangeDutyCycle(0)
-	LED3Ctl.ChangeDutyCycle(0)
+	#set freq
+	motorCtl = GPIO.PWM(motorPWMPin, 100)
+
+	#set initial speed
+	motorCtl.start(motorSpeed)
+
 	time.sleep(0.05)
-
 
 	control_LED_thread = threading.Thread(target=controlLED)
 	control_LED_thread.start()
@@ -128,9 +122,15 @@ def main(args):
 	wait_for_string_thread.start()
 
 	while True:
-		LED1Ctl.ChangeDutyCycle(LED1)
-		LED2Ctl.ChangeDutyCycle(LED2)
-		LED3Ctl.ChangeDutyCycle(LED3)
+		motorCtl.ChangeDutyCycle(motorSpeed)
+
+		if motorDir==0:
+			GPIO.output(motorDir1Pin, GPIO.HIGH)
+			GPIO.output(motorDir2Pin, GPIO.LOW)
+		else:
+			GPIO.output(motorDir1Pin, GPIO.LOW)
+			GPIO.output(motorDir2Pin, GPIO.HIGH)
+
 		time.sleep(0.05)
 
 if __name__ == '__main__':
