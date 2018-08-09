@@ -42,11 +42,12 @@ def LED_close(greenPin, bluePin, redPin):
 def LED_const(pin):
 	GPIO.output(pin, GPIO.LOW)
 
-def sendImage():
+def sendImage(clientIP):
 	client_socket = socket.socket()
 	#client_socket.connect(('10.0.0.21',8000)) #automation
 	#client_socket.connect(('192.168.11.7',8000)) #bufolo
-	client_socket.connect(('dell',8000)) #hostname
+	#client_socket.connect(('dell',8000)) #hostname
+	client_socket.connect((clientIP,8000))
 	connection = client_socket.makefile('wb')
 	try:
 		with picamera.PiCamera() as camera:
@@ -88,7 +89,7 @@ def main(args):
 					print data
 					if data == 'imageReq':
 						LED_STATE=1
-						sendImage()
+						sendImage(addr[0])
 				#conn.close()
 		except:
 			pass
