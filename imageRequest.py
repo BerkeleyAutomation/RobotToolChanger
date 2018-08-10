@@ -39,7 +39,7 @@ def receivingImage(server_socket):
             # processing on it
             image_stream.seek(0)
             image = Image.open(image_stream)
-            image.save('Desktop/1.jpg')
+            image.save('/home/ron/Desktop/1.jpg')
             print('Image is %dx%d' % image.size)
             image.verify()
             im = np.array(image)

@@ -1,9 +1,12 @@
 import socket
+import time
+
 from PIL import Image
 import numpy as np
 
 # imageToolIP = '10.0.0.15'
-lightToolIP = '192.168.42.75'
+#lightToolIP = '192.168.42.75'
+lightToolIP = 'lightpi'
 lightToolPort = 8003
 
 def sendImageRequest(textToSend):
@@ -17,9 +20,6 @@ def sendImageRequest(textToSend):
 def main():
     while True:
         textToSend = raw_input("Hit any key for image request:")
-        server_socket = socket.socket()
-        server_socket.bind(('0.0.0.0', 8000))
-        server_socket.listen(0)
         sendImageRequest(textToSend)
 
 if __name__ == '__main__':
