@@ -1,8 +1,10 @@
 import pygame
 from time import sleep
-from yumipy import YuMiRobot
+# from yumipy import YuMiRobot
 import datetime
 import pickle
+from yumipy import YuMiConstants as YMC
+from yumipy import YuMiSubscriber
 
 def main():
 
@@ -10,9 +12,11 @@ def main():
     pygame.joystick.init()
     pygame.joystick.Joystick(0).init()
 
+    sub = YuMiSubscriber()    
+    sub.start()
+
     # starting the robot interface
     print('RTK')
-    y = YuMiRobot()
     data = []
     pointNum=0
 
@@ -21,7 +25,8 @@ def main():
         btn_y = pygame.joystick.Joystick(0).get_button(4)
         btn_a = pygame.joystick.Joystick(0).get_button(0)
         if btn_y==1:
-            data.append(y.right.get_pose())
+            _, pose_r = sub.right.get_pose()
+            data.append(pose_r)
             pointNum=pointNum+1
             print 'point recorded'
             sleep(.3)
@@ -34,14 +39,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
-# from yumipy import YuMiRobot
-# starting the robot interface
-# getting the current pose of the right end effector
-#pose = y.right.get_pose()
-# print(pose)
-# # move right arm forward by 5cm using goto_pose
-# pose.translation[0] += 0.05
-# y.right.goto_pose(pose)
-# # move right arm back by 5cm using move delta
-# y.right.goto_pose_delta((-0.05,0,0))

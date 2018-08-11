@@ -3,53 +3,144 @@ from time import sleep
 from yumipy import YuMiRobot
 import datetime
 import pickle
+from autolab_core import RigidTransform
+import tf
+import math
+import threading
 
-def main():
+yumi = YuMiRobot()
+pygame.display.init()
+pygame.joystick.init()
+pygame.joystick.Joystick(0).init()
 
-    pygame.display.init()
-    pygame.joystick.init()
-    pygame.joystick.Joystick(0).init()
 
-    # starting the robot interface
-    print('RTK')
-    y = YuMiRobot()
-
-    data = pickle.load(open("/home/ron/Desktop/YUMI_POS.p",'rb'))
-
-    for i in range(0,len(data),1):
-        print(data[i])
-        sleep(3)
-    num_of_pos = len(data)
-    pointNum = 0
+def disconnect_tool(pos_num):
     while True:
         pygame.event.pump()
         btn_y = pygame.joystick.Joystick(0).get_button(4)
-        btn_a = pygame.joystick.Joystick(0).get_button(0)
-        if btn_y==1:
-            pose = data[pointNum]
-            y.right.goto_pose(pose)
-            pointNum=pointNum+1
-            print 'point recorded'
-            sleep(.3)
-        if pointNum>num_of_pos:
+        # btn_a = pygame.joystick.Joystick(0).get_button(0)
+        if btn_y == 1:
             break
-        if btn_a==1:
-            break
-    now = datetime.datetime.now()
-    timeStr = str(now.year)+"-"+str(now.month)+"-"+str(now.day)+"_"+str(now.hour)+":"+str(now.minute)+":"+str(now.second)+":"+str(now.microsecond)
+    X = 0
+    Y = 0
+    H = 0
+    V = 0
+    pos = RigidTransform()
+    pos.from_frame = 'robot'
 
-    pickle.dump(data, open("/home/ron/Desktop/YUMI_POS.p", "wb"))
+    h0 = 0.1453
+    h1 = 0.097
+
+    x0 = 0.394  # y = -0.4303
+    x1 = 0.4967  # y = -0.4324
+    x2 = 0.5533  # y = -0.4332
+    x3 = x2
+    x4 = 0.4949  # y = -0.4353
+    x5 = 0.394
+
+    y = -0.4365
+
+    rot0 = 180
+    rot1 = 155
+
+    v_very_slow = 50
+    v_slow = 100
+    v = 200
+
+    if pos_num == 0:
+        X, Y, H, ROT, V = x5, y, h1, rot1, v
+    elif pos_num == 1:
+        X, Y, H, ROT, V = x4, y, h1, rot1, v_very_slow
+    elif pos_num == 2:
+        X, Y, H, ROT, V = x3, y, h1, rot1, v_very_slow
+    elif pos_num == 3:
+        X, Y, H, ROT, V = x2, y, h0, rot1, v_slow
+    elif pos_num == 4:
+        X, Y, H, ROT, V = x1, y, h0, rot1, v_slow
+    elif pos_num == 5:
+        X, Y, H, ROT, V = x0, y, h0, rot1, v
+
+    pos.translation = X, Y, H
+    quat = tf.transformations.quaternion_from_euler(math.radians(ROT), math.radians(0), math.radians(180))
+    pos.quaternion[0:3] = quat[0:3]
+    pos.rotation = RigidTransform.rotation_from_quaternion(quat)
+    yumi.set_v(V)
+    yumi.right.goto_pose(pos)
+    sleep(.3)
+
+
+def connect_tool(pos_num):
+    while True:
+        pygame.event.pump()
+        btn_y = pygame.joystick.Joystick(0).get_button(4)
+        # btn_a = pygame.joystick.Joystick(0).get_button(0)
+        if btn_y == 1:
+            break
+            # connect_tool(pos_num)
+            # pos_num = pos_num + 1
+        # if pos_num == 6:
+        #     pos_num = 0
+        # if btn_a == 1:
+        #     break
+
+    X = 0
+    Y = 0
+    H = 0
+    V = 0
+    pos = RigidTransform()
+    pos.from_frame = 'robot'
+
+    h0 = 0.1453
+    h1 = 0.095
+
+    x0 = 0.394  # y = -0.4303
+    x1 = 0.4967  # y = -0.4324
+    x2 = 0.5533  # y = -0.4332
+    x3 = x2
+    x4 = 0.4949  # y = -0.4353
+    x5 = 0.394
+
+    y = -0.4365
+
+    rot0 = 180
+    rot1 = 155
+
+    v_very_slow = 50
+    v_slow = 100
+    v = 200
+
+    if pos_num == 0:
+        X, Y, H, ROT, V = x0, y, h0, rot0, v
+    elif pos_num == 1:
+        X, Y, H, ROT, V = x1, y, h0, rot0, v_slow
+    elif pos_num == 2:
+        X, Y, H, ROT, V = x2, y, h0, rot1, v_very_slow
+    elif pos_num == 3:
+        X, Y, H, ROT, V = x3, y, h1, rot1, v_slow
+    elif pos_num == 4:
+        X, Y, H, ROT, V = x4, y, h1, rot1, v_slow
+    elif pos_num == 5:
+        X, Y, H, ROT, V = x5, y, h1, rot1, v
+
+    pos.translation = X, Y, H
+    quat = tf.transformations.quaternion_from_euler(math.radians(ROT), math.radians(0), math.radians(180))
+    pos.quaternion[0:3] = quat[0:3]
+    pos.rotation = RigidTransform.rotation_from_quaternion(quat)
+    yumi.set_v(V)
+    yumi.right.goto_pose(pos)
+    sleep(.3)
+
+def main():
+
+    pos_num = 0
+    while True:
+        for i in range(0,5,1):
+            connect_tool(i)
+
+        for i in range(0, 5, 1):
+            disconnect_tool(i)
+
+    yumi.stop()
 
 if __name__ == '__main__':
     main()
-    
-# from yumipy import YuMiRobot
-# starting the robot interface
-# getting the current pose of the right end effector
-#pose = y.right.get_pose()
-# print(pose)
-# # move right arm forward by 5cm using goto_pose
-# pose.translation[0] += 0.05
-# y.right.goto_pose(pose)
-# # move right arm back by 5cm using move delta
-# y.right.goto_pose_delta((-0.05,0,0))
