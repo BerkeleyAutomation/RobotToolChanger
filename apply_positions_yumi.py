@@ -62,7 +62,7 @@ def disconnect_tool(pos_num):
     elif pos_num == 3:
         X, Y, H, ROT0, ROT1, V = x5 + 0.01, y, h1, rot0_1, rot1_1, v_very_slow
     elif pos_num == 4:
-        X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_1, v_very_slow
+        X, Y, H, ROT0, ROT1, V = x5 + 0.015, y, h1, rot0_1, rot1_1, v_very_slow
     elif pos_num == 5:
         X, Y, H, ROT0, ROT1, V = x3, y, h1, rot0_1, rot1_0, v_very_slow
     elif pos_num == 6:
@@ -146,11 +146,11 @@ def main():
     global stop_btn
     try:
         while stop_btn==0:
-            #for i in range(0,6,1):
-                #connect_tool(i)
-            #if stop_btn==1:
-                #continue
-            for i in range(0, 6, 1):
+            for i in range(0,6,1):
+                connect_tool(i)
+            if stop_btn==1:
+                continue
+            for i in range(0, 8, 1):
                 disconnect_tool(i)
     except:
         pass
