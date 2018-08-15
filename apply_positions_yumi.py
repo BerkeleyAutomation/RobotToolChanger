@@ -43,27 +43,30 @@ def disconnect_tool(pos_num):
 
     y = -0.4365
 
-    rot0 = 180
-    rot1 = 155
+    rot0_0 = 180
+    rot0_1 = 155
+
+    rot1_0 = 0
+    rot1_1 = 2
 
     v_very_slow = 50
     v_slow = 100
     v = 200
 
     if pos_num == 0:
-        X, Y, H, ROT, V = x6, y, h1, rot1, v
+        X, Y, H, ROT0, ROT1, V = x6, y, h1, rot0_1, rot1_0, v
     elif pos_num == 1:#NEW point
-        X, Y, H, ROT, V = x5, y, 0.0964, rot1, v
+        X, Y, H, ROT0, ROT1, V = x5, y, 0.0964, rot0_1, rot1_0, v
     elif pos_num == 2:
-        X, Y, H, ROT, V = x4, y, h1, rot1, v_very_slow
+        X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_0, v_very_slow
     elif pos_num == 3:
-        X, Y, H, ROT, V = x3, y, h1, rot1, v_very_slow
+        X, Y, H, ROT0, ROT1, V = x3, y, h1, rot0_1, rot1_0, v_very_slow
     elif pos_num == 4:
-        X, Y, H, ROT, V = x2, y, h0, rot1, v_slow
+        X, Y, H, ROT0, ROT1, V = x2, y, h0, rot0_1, rot1_0, v_slow
     elif pos_num == 5:
-        X, Y, H, ROT, V = x1, y, h0, rot1, v_slow
+        X, Y, H, ROT0, ROT1, V = x1, y, h0, rot0_1, rot1_0, v_slow
     elif pos_num == 6:
-        X, Y, H, ROT, V = x0, y, h0, rot1, v
+        X, Y, H, ROT0, ROT1, V = x0, y, h0, rot0_1, rot1_0, v
 
     pos.translation = X, Y, H
     quat = tf.transformations.quaternion_from_euler(math.radians(ROT), math.radians(0), math.radians(180))
