@@ -54,9 +54,9 @@ def disconnect_tool(pos_num):
     v = 200
 
     if pos_num == 0:
-        X, Y, H, ROT0, ROT1, V = x6, y, h1, rot0_1, rot1_0, v
+        X, Y, H, ROT0, ROT1, V = x6, y, h1, rot0_1, rot1_1, v
     elif pos_num == 1:#NEW point
-        X, Y, H, ROT0, ROT1, V = x5, y, 0.0964, rot0_1, rot1_0, v
+        X, Y, H, ROT0, ROT1, V = x5, y, 0.0964, rot0_1, rot1_1, v_very_slow
     elif pos_num == 2:
         X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_0, v_very_slow
     elif pos_num == 3:
@@ -69,7 +69,7 @@ def disconnect_tool(pos_num):
         X, Y, H, ROT0, ROT1, V = x0, y, h0, rot0_1, rot1_0, v
 
     pos.translation = X, Y, H
-    quat = tf.transformations.quaternion_from_euler(math.radians(ROT), math.radians(0), math.radians(180))
+    quat = tf.transformations.quaternion_from_euler(math.radians(ROT0), math.radians(ROT1), math.radians(180))
     pos.quaternion[0:3] = quat[0:3]
     pos.rotation = RigidTransform.rotation_from_quaternion(quat)
     yumi.set_v(V)
