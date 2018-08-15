@@ -47,7 +47,7 @@ def disconnect_tool(pos_num):
     rot0_1 = 155
 
     rot1_0 = 0
-    rot1_1 = 2
+    rot1_1 = 0
 
     v_very_slow = 50
     v_slow = 100
@@ -142,11 +142,11 @@ def main():
     global stop_btn
     try:
         while stop_btn==0:
-            for i in range(0,6,1):
-                connect_tool(i)
-            if stop_btn==1:
-                continue
-            for i in range(0, 5, 1):
+            #for i in range(0,6,1):
+                #connect_tool(i)
+            #if stop_btn==1:
+                #continue
+            for i in range(0, 6, 1):
                 disconnect_tool(i)
     except:
         pass
