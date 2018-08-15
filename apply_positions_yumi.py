@@ -15,9 +15,10 @@ pygame.joystick.Joystick(0).init()
 
 stop_btn = 0
 
+
 def disconnect_tool(pos_num):
     global stop_btn
-    while stop_btn==0:
+    while stop_btn == 0:
         pygame.event.pump()
         btn_y = pygame.joystick.Joystick(0).get_button(4)
         stop_btn = pygame.joystick.Joystick(0).get_button(0)
@@ -31,7 +32,7 @@ def disconnect_tool(pos_num):
     pos.from_frame = 'robot'
 
     h0 = 0.1453
-    h1 = 0.0935
+    h1 = 0.095
 
     x0 = 0.394  # y = -0.4303
     x1 = 0.4967  # y = -0.4324
@@ -83,7 +84,7 @@ def disconnect_tool(pos_num):
 
 def connect_tool(pos_num):
     global stop_btn
-    while stop_btn==0:
+    while stop_btn == 0:
         pygame.event.pump()
         btn_y = pygame.joystick.Joystick(0).get_button(4)
         stop_btn = pygame.joystick.Joystick(0).get_button(0)
@@ -98,13 +99,13 @@ def connect_tool(pos_num):
     pos.from_frame = 'robot'
 
     h0 = 0.1453
-    h1 = 0.094
+    h1 = 0.092
 
     x0 = 0.394  # y = -0.4303
     x1 = 0.4967  # y = -0.4324
     x2 = 0.5533  # y = -0.4332
     x3 = x2
-    x4 = 0.45 #0.4949  # y = -0.4353
+    x4 = 0.45  # 0.4949  # y = -0.4353
     x5 = 0.394
 
     y = -0.436
@@ -128,10 +129,14 @@ def connect_tool(pos_num):
     elif pos_num == 3:
         X, Y, H, ROT0, ROT1, V = x3, y, h1, rot0_1, rot1_0, v_slow
     elif pos_num == 4:
-	X, Y, H, ROT0, ROT1, V = x3 - 0.015, y, h1, rot0_1, rot1_0, v_slow
+        X, Y, H, ROT0, ROT1, V = x3 - 0.015, y, h1, rot0_1, rot1_0, v_slow
     elif pos_num == 5:
-        X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_1, 300
+        X, Y, H, ROT0, ROT1, V = x3 - 0.020, y, h1, rot0_1, rot1_0, v_slow
     elif pos_num == 6:
+        X, Y, H, ROT0, ROT1, V = x3 - 0.025, y, h1, rot0_1, rot1_0, v_slow
+    elif pos_num == 7:
+        X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_1, v_slow
+    elif pos_num == 8:
         X, Y, H, ROT0, ROT1, V = x5, y, h1, rot0_1, rot1_0, v
 
     pos.translation = X, Y, H
@@ -142,13 +147,14 @@ def connect_tool(pos_num):
     yumi.right.goto_pose(pos)
     sleep(.3)
 
+
 def main():
     global stop_btn
     try:
-        while stop_btn==0:
-            for i in range(0,6,1):
+        while stop_btn == 0:
+            for i in range(0, 6, 1):
                 connect_tool(i)
-            if stop_btn==1:
+            if stop_btn == 1:
                 continue
             for i in range(0, 8, 1):
                 disconnect_tool(i)
@@ -156,6 +162,7 @@ def main():
         pass
 
     yumi.stop()
+
 
 if __name__ == '__main__':
     main()
