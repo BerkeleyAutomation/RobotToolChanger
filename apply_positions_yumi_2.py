@@ -33,7 +33,7 @@ def connect_tool():
 
     x0 = 0.394  # y = -0.4303
     x1 = 0.4967  # y = -0.4324
-    x2 = 0.5533  # y = -0.4332
+    x2 = 0.5525  # y = -0.4332
     x3 = x2
     x4 = 0.45  # 0.4949  # y = -0.4353
     x5 = 0.394
@@ -48,19 +48,19 @@ def connect_tool():
 
     rot2 = 180
 
-    move_YUMI(x0,           y, h0, rot0_0, rot1_0, rot2, v)
-    move_YUMI(x1,           y, h0, rot0_0, rot1_0, rot2, v_slow)
-    move_YUMI(x2,           y, h0, rot0_1, rot1_0, rot2, v_very_slow)
-    move_YUMI(x3,           y, h1, rot0_1, rot1_0, rot2, v_slow)
-    move_YUMI(x3 - 0.015,   y, h1, rot0_1, rot1_0, rot2, v_slow)
-    x_tmp = x3 - 0.015
-    rot_tmp = -3
-    for i in range(0,14,1):
-        x_tmp = x_tmp - 0.0025
-        rot_tmp = -rot_tmp
-        move_YUMI(x_tmp, y, h1, rot0_1+rot_tmp, rot1_0, rot2, 300)
+    move_YUMI(x0, y, h0, rot0_0, rot1_0, rot2, v) #start point
+    move_YUMI(x1, y, h0, rot0_0, rot1_0, rot2, v_slow) #point 1
+    move_YUMI(x2, y, h0, rot0_1, rot1_0, rot2, v_very_slow)
+    move_YUMI(x3, y, h1, rot0_1, rot1_0, rot2, v_slow)
 
-    move_YUMI(x5,           y, h1, rot0_1, rot1_0, rot2, v)
+    x_tmp = x3
+    rot_tmp = -2.5
+    for i in range(0,22,1):
+        x_tmp = x_tmp - 0.0017
+        rot_tmp = -rot_tmp
+        move_YUMI(x_tmp, y, h1, rot0_1+rot_tmp, rot1_0, rot2, 1000)
+
+    move_YUMI(x5, y, h1, rot0_1, rot1_0, rot2, v)
 
 
 def disconnect_tool():
@@ -102,9 +102,15 @@ def disconnect_tool():
 
 
 def main():
-    while True:
-        connect_tool()
-        disconnect_tool()
+    itr = 0
+    for j in range(0,100,1):
+        for i in range(0,10,1):
+            print('iteration: ', itr)
+            connect_tool()
+            disconnect_tool()
+            itr = itr + 1
+        print('Sleep')
+        sleep(20)
 
     yumi.stop()
 
