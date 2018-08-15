@@ -37,8 +37,9 @@ def disconnect_tool(pos_num):
     x1 = 0.4967  # y = -0.4324
     x2 = 0.5533  # y = -0.4332
     x3 = x2
-    x4 = 0.4949  # y = -0.4353
-    x5 = 0.394
+    x4 = 0.495  # y = -0.4353
+    x5 = 0.49
+    x6 = 0.395
 
     y = -0.4365
 
@@ -46,23 +47,25 @@ def disconnect_tool(pos_num):
     rot0_1 = 155
 
     rot1_0 = 0
-    rot1_1 = 0
+    rot1_1 = 2
 
     v_very_slow = 50
     v_slow = 100
     v = 200
 
     if pos_num == 0:
-        X, Y, H, ROT0, ROT1, V = x5, y, h1, rot0_1, rot1_1, v
+        X, Y, H, ROT0, ROT1, V = x6, y, h1, rot0_1, rot1_1, v
     elif pos_num == 1:
-        X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_0, v
+        X, Y, H, ROT0, ROT1, V = x5, y, h1, rot0_1, rot1_1, v_very_slow
     elif pos_num == 2:
-        X, Y, H, ROT0, ROT1, V = x3, y, h1, rot0_1, rot1_0, v_slow
+        X, Y, H, ROT0, ROT1, V = x4, y, h1, rot0_1, rot1_0, v_slow
     elif pos_num == 3:
-        X, Y, H, ROT0, ROT1, V = x2, y, h0, rot0_1, rot1_0, v_slow
+        X, Y, H, ROT0, ROT1, V = x3, y, h1, rot0_1, rot1_0, v_slow
     elif pos_num == 4:
-        X, Y, H, ROT0, ROT1, V = x1, y, h0, rot0_1, rot1_0, v_slow
+        X, Y, H, ROT0, ROT1, V = x2, y, h0, rot0_1, rot1_0, v_slow
     elif pos_num == 5:
+        X, Y, H, ROT0, ROT1, V = x1, y, h0, rot0_1, rot1_0, v_slow
+    elif pos_num == 6:
         X, Y, H, ROT0, ROT1, V = x0, y, h0, rot0_1, rot1_0, v
 
     pos.translation = X, Y, H
