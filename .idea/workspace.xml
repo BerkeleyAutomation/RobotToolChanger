@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0cc3560a-ff51-42c2-b034-9766558fbcef" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apply_positions_yumi_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/apply_positions_yumi_2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,12 +97,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apply_positions_yumi_2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="688">
-              <caret line="112" column="20" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="20" />
+            <state relative-caret-position="1576">
+              <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#1575#2482#0" />
-                <marker date="1534367979260" expanded="true" signature="1608:2523" ph="..." />
               </folding>
             </state>
           </provider>
@@ -369,12 +366,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apply_positions_yumi_2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="112" column="20" selection-start-line="112" selection-start-column="20" selection-end-line="112" selection-end-column="20" />
+        <state relative-caret-position="1576">
+          <caret line="111" column="20" selection-start-line="111" selection-start-column="20" selection-end-line="111" selection-end-column="20" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#1575#2482#0" />
-            <marker date="1534367979260" expanded="true" signature="1608:2523" ph="..." />
           </folding>
         </state>
       </provider>
