@@ -100,20 +100,16 @@ def disconnect_tool():
 
 
 def main():
-    loop = 0
     if len(sys.argv)>1:
-        loop = sys.argv[1]
+        loop = int(sys.argv[1])
     else:
         loop = 1
     itr = 0
-    for j in range(0,100,1):
-        for i in range(0,10,1):
-            print('iteration: ', itr)
-            connect_tool()
-            disconnect_tool()
-            itr = itr + 1
-        print('Sleep')
-        sleep(20)
+    for i in range(0,loop,1):
+        print('iteration: ', itr)
+        connect_tool()
+        disconnect_tool()
+        itr = itr + 1
 
     yumi.stop()
 
