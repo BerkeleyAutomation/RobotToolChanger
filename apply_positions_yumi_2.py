@@ -1,12 +1,10 @@
-import pygame
-from time import sleep
-from yumipy import YuMiRobot
-import datetime
-import pickle
-from autolab_core import RigidTransform
-import tf
 import math
-import threading
+from time import sleep
+
+import tf
+from autolab_core import RigidTransform
+from yumipy import YuMiRobot
+import sys
 
 yumi = YuMiRobot()
 
@@ -102,6 +100,11 @@ def disconnect_tool():
 
 
 def main():
+    loop = 0
+    if len(sys.argv)>1:
+        loop = sys.argv[1]
+    else:
+        loop = 1
     itr = 0
     for j in range(0,100,1):
         for i in range(0,10,1):
