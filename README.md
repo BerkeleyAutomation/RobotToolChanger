@@ -15,7 +15,7 @@ Most of the component were 3D printed which may contributes to the adoption of t
 For this case study we created 4 tools, camera, light, cutting, and moister sensor tool. 
 For each tool we provide the CAD design, the electrical drawing, and the program to control it.
 
-A [raspberryPi zero w](/https://www.raspberrypi.org/products/raspberry-pi-zero-w/) is installed in each tool and is used as the main computing unit of the tool. 
+A [raspberryPi zero w](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) is installed in each tool and is used as the main computing unit of the tool. 
 The connection of the tool with the remote computer is via WIFI. The robot should provide power (24v) to the tool.
 
 ### preparing the raspberryPi
