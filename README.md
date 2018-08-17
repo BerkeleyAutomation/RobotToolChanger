@@ -1,59 +1,39 @@
 # Tool changer for robots
 In this work we developed a tool changer for robots. 
+With minor adjustments the tool changer design can be retrofit to most mobile and stationary robots.
+The project includes the design, manufacture, programing, and evaluation of a tool changer for robots. 
+To examine the design we evaluated the tool changer on ABB YUMI, two-arm stationary robot. 
+
 
 ## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
+This work was first published at [CASE-2018](/http://ronberenstein.com/publications.html). 
+This publication present the three main components needed to create a tool changer, robot, tool, and tool housing.
+Most of the component were 3D printed which may contributes to the adoption of the design.
+   
 ### Prerequisites
 
-What things you need to install the software and how to install them
+TODO
 
-```
-Give examples
-```
+## The tools
+For this case study we created 4 tools, camera, light, cutting, and moister sensor tool. 
+For each tool we provide the CAD design, the electrical drawing, and the program to control it.
 
-### Installing
+A [raspberryPi zero w](/https://www.raspberrypi.org/products/raspberry-pi-zero-w/) is installed in each tool and is used as the main computing unit of the tool. 
+The connection of the tool with the remote computer is via WIFI. The robot should provide power (24v) to the tool.
 
-A step by step series of examples that tell you how to get a development env running
+### preparing the raspberryPi
+Before starting using the raspberryPi please follow the instructions [here](/https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up). 
+In this work we will use the NOOBS installer with **Raspbian**. 
 
-Say what the step will be
-
+## points to include
+* add examples
 ```
 Give the example
 ```
+* note that the tool and the remote computer should be connected to the same router, and are able to communicate (check using ping).
 
-And repeat
 
-```
-until finished
-```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
