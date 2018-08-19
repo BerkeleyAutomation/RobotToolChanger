@@ -19,7 +19,7 @@ def sendImageRequest(textToSend):
 
 def main():
     while True:
-        textToSend = raw_input("Hit any key for image request:")
+        textToSend = raw_input("To set motor speed and direction enter: 'setLight_001_010_099':")
         sendImageRequest(textToSend)
 
 if __name__ == '__main__':
