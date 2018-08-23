@@ -1,6 +1,6 @@
 # Tool changer for robots
 In this work we developed a tool changer for robots. 
-With minor adjustments, the tool changer design can be retrofit to most mobile and stationary robots.
+With minor adjustments, the tool changer design can be retrofited to most mobile and stationary robots.
 The project includes the design, manufacture, programing, and evaluation of a tool changer for robots. 
 To examine the design we evaluated the tool changer on the ABB YUMI, a two-arm stationary robot. 
 
