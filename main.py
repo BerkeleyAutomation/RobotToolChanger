@@ -4,6 +4,7 @@ from time import sleep
 import tf
 from autolab_core import RigidTransform
 from yumipy import YuMiRobot
+from yumipy import YuMiState
 import sys
 
 import io
@@ -373,7 +374,6 @@ def getImage(im_name):
 
 
 def receivingImage(server_socket):
-    # Accept a single connection and make a file-like object out of it
     connection = server_socket.accept()[0].makefile('rb')
     try:
         while True:
@@ -402,13 +402,20 @@ def receivingImage(server_socket):
         print('rtk')
         pass
 
+
 def setLight(msg):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect(('lightpi', 8003))
     s.send(msg)
     s.close()
+
+
 def cameraAndLight():
-    image_num=1
+    # init arm position
+    armIntPos('l')
+    armIntPos('r')
+
+    image_num = 1
     light_tool('connect', 'r')
     camera_tool('connect', 'l')
     sleep(90)
@@ -427,19 +434,18 @@ def cameraAndLight():
     rotL_2 = 0
     rotL_3 = 180
 
-
     x = 0.44
     y = 0.1
     move_YUMI(x, y, zL, rotL_1, rotL_2, rotL_3, 200, 'l')
     move_YUMI(x - 0.1, y - 0.1, zR, rotR_1, rotR_2, rotR_3, 200, 'r')
     sleep(1)
     getImage(image_num)
-    image_num=image_num+1
+    image_num = image_num + 1
     sleep(1)
-    for h in range(0,2,1):
+    for h in range(0, 2, 1):
         y = y - 0.1
-        move_YUMI(x - 0.1, y - 0.1,   zR, rotR_1, rotR_2, rotR_3, 200, 'r')
-        move_YUMI(x,    y,          zL, rotL_1, rotL_2, rotL_3, 200, 'l')
+        move_YUMI(x - 0.1, y - 0.1, zR, rotR_1, rotR_2, rotR_3, 200, 'r')
+        move_YUMI(x, y, zL, rotL_1, rotL_2, rotL_3, 200, 'l')
         sleep(1)
         getImage(image_num)
         image_num = image_num + 1
@@ -479,12 +485,143 @@ def cameraAndLight():
         getImage(image_num)
         image_num = image_num + 1
         sleep(1)
-        
+
     armIntPos('l')
     armIntPos('r')
     setLight('setLight_000_000_000')
     light_tool('disconnect', 'r')
     camera_tool('disconnect', 'l')
+
+
+def getMoistureRead(data_num):
+    server_socket = socket.socket()
+    server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    server_socket.bind(('0.0.0.0', 8000))
+    server_socket.listen(0)
+    MESSAGE = "moistureReq"
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('moisturepi', 8001))
+    s.send(MESSAGE)
+    s.close()
+    conn, addr = server_socket.accept()
+    data = conn.recv(1024)
+    conn.close()
+    server_socket.close()
+    p_data = 100 - ((int(data) - 523) * 100) / 500
+    print(p_data)
+    file = open('/home/ron/remoteComputer/data/moistureData.txt', 'a')
+    file.write('plant_' + str(data_num) + ' val: ' + str(p_data))
+    file.write('\n')
+    file.close()
+
+
+def moistureEval():
+    plant_count = 1
+    # move_YUMI(0.394, 0.43, 0.1453, 155, 0, 180, 200, 'l') #move left arm
+    # home position
+    # yumi.right.goto_state(YuMiState([0, -130, 30, 0, 40, 0, -135]))
+    # yumi.left.goto_state(YuMiState([0, -130, 30, 0, 40, 0, 135]))
+    yumi.reset_home()
+    # yumi.right.goto_state(YuMiState([-10.97, -38.08, 43.66, -51.39, 46.7, -165.03, 2.61]), True)
+    # j = yumi.right.get_state()
+    moisture_tool('connect', 'r')
+    sleep(90)
+    yumi.right.goto_state(YuMiState([34.14, -77.67, 34.55, -85.20, 81.87, -184.61, -32.75]), True)
+
+    yumi.right.goto_pose_delta((0.025, 0, 0.065))
+
+    dZ = 0.085
+    yumi.right.goto_pose_delta((0, 0.43, 0))
+    yumi.right.goto_pose_delta((0, 0, -dZ))
+    sleep(2)
+    getMoistureRead(plant_count)
+    plant_count = plant_count + 1
+    yumi.right.goto_pose_delta((0, 0, dZ))
+    for Hor in range(0, 2, 1):
+        yumi.right.goto_pose_delta((0, -0.1, 0))
+        yumi.right.goto_pose_delta((0, 0, -dZ))
+        sleep(2)
+        getMoistureRead(plant_count)
+        plant_count = plant_count + 1
+        yumi.right.goto_pose_delta((0, 0, dZ))
+
+    yumi.right.goto_pose_delta((0.1, 0, 0))
+    yumi.right.goto_pose_delta((0, 0, -dZ))
+    sleep(2)
+    getMoistureRead(plant_count)
+    plant_count = plant_count + 1
+    yumi.right.goto_pose_delta((0, 0, dZ))
+    for Hor in range(0, 2, 1):
+        yumi.right.goto_pose_delta((0, 0.1, 0))
+        yumi.right.goto_pose_delta((0, 0, -dZ))
+        sleep(2)
+        getMoistureRead(plant_count)
+        plant_count = plant_count + 1
+        yumi.right.goto_pose_delta((0, 0, dZ))
+
+    yumi.right.goto_pose_delta((0.1, 0, 0))
+    yumi.right.goto_pose_delta((0, 0, -dZ))
+    sleep(2)
+    getMoistureRead(plant_count)
+    plant_count = plant_count + 1
+    yumi.right.goto_pose_delta((0, 0, dZ))
+    for Hor in range(0, 2, 1):
+        yumi.right.goto_pose_delta((0, -0.1, 0))
+        yumi.right.goto_pose_delta((0, 0, -dZ))
+        sleep(2)
+        getMoistureRead(plant_count)
+        plant_count = plant_count + 1
+        yumi.right.goto_pose_delta((0, 0, dZ))
+
+    yumi.right.goto_pose_delta((-0.3, -0.1, 0))
+
+    yumi.right.goto_state(YuMiState([34.14, -77.67, 34.55, -85.20, 81.87, -184.61, -32.75]), True)
+    # yumi.right.goto_state(YuMiState([81.97, -97.66, 36.1, -119.24, 126.79, -192.26, -10.8]), True)
+    yumi.reset_home()
+    moisture_tool('disconnect', 'r')
+
+
+def setMotor(speed):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect(('cuttingpi', 8003))
+    s.send('setSpeed_000_0'+speed)
+    s.close()
+
+
+def trimGrass():
+    # yumi.reset_home()
+    armIntPos('l')
+    cutting_tool('connect', 'l')
+    sleep(100)
+    setMotor('99')
+    zL = 0.195
+    rotL_1 = 155
+    rotL_2 = 0
+    rotL_3 = 180
+
+    x = 0.42
+    y = 0.17
+    move_YUMI(x, y, zL, rotL_1, rotL_2, rotL_3, 200, 'l')
+
+    gardenH = 350  # [mm]
+    gardenV = 200  # [mm]
+    interH = 50  # [mm]
+    interV = 20  # [mm]
+    sign = -1
+    for i in range(0, int(round(gardenV / interV)), 1):
+        for j in range(0, int(round(gardenH / interH)), 1):
+            y = y + float(interH) / 1000 * sign
+            print (i,j,x,y)
+            move_YUMI(x, y, zL, rotL_1, rotL_2, rotL_3, 20, 'l')
+        x = x + float(interV) / 1000
+        move_YUMI(x, y, zL, rotL_1, rotL_2, rotL_3, 20, 'l')
+        sign = sign * -1
+
+    move_YUMI(0.6, 0, 0.25, rotL_1, rotL_2, rotL_3, 400, 'l')
+    move_YUMI(0.44, 0.2, 0.25, rotL_1, rotL_2, rotL_3, 400, 'l')
+    # armIntPos('l')
+    setMotor('00')
+    cutting_tool('disconnect', 'l')
 
 
 def armIntPos(robot_side):
@@ -501,11 +638,16 @@ def main():
         loop = int(sys.argv[1])
     else:
         loop = 1
+
+    # sleep(1)
+    cameraAndLight()
+
+    moistureEval()
+
+    trimGrass()
+
     armIntPos('l')
     armIntPos('r')
-
-    sleep(1)
-    cameraAndLight()
     # itr = 0
     # for i in range(0,loop,1):
     #     print('iteration: ', itr)
