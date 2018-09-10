@@ -50,7 +50,7 @@ installed facing inwards. The intensity of each LED can be controlled.
 CAD design of the Flashlight-tool can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/CAD/Light%20Tool),
 and electrical drawing [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/ElectricalDrawings).
 
-The Flashlight-tool acts as a server and wait for set light command. The Program running on the Flashlight-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/lightToolServer.py).
+The Flashlight-tool acts as a server and waits for set light command. The Program running on the Flashlight-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/lightToolServer.py).
 To set a light to the three LED's use a remote computer connected to the same network, and run [this](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/remoteComputer/setLight.py) program.
 For example:
 ```
@@ -69,7 +69,7 @@ and a 30mm steel saw. The rotating direction and speed can be controlled using P
 CAD design of the Trim-tool can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/CAD/Cutting%20Tool),
 and electrical drawing [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/ElectricalDrawings).
 
-The Trim-tool acts as a server and wait for set speed command. The Program running on the Trim-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/cuttingToolServer.py).
+The Trim-tool acts as a server and waits for set speed command. The Program running on the Trim-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/cuttingToolServer.py).
 To set a motor speed we use a remote computer connected to the same network, and run [this](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/remoteComputer/setMotor.py) program.
 For example:
 ```
@@ -81,6 +81,22 @@ To set motor speed to 50% power, enter the following in the terminal:
 setSpeed_000_050
 ```
 where 000 is clockwise (001 is counterclockwise) and 050 is the 50% power.
+
+### Moisture-tool
+The Moisture-tool is used to take moisture content readings of soil. The moisture sensor we used is the YL-69 with the HC-38 module (https://www.amazon.com/Hygrometer-Humidity-Detection-Moisture-Arduino/dp/B00ESBNYRS).
+
+CAD design of the Moisture-tool can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/CAD/Moisture%20Tool),
+and electrical drawing [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/ElectricalDrawings).
+The Moisture-tool uses the MCP3008 (https://www.amazon.com/Adafruit-MCP3008-8-Channel-Interface-Raspberry/dp/B00NAY3RB2) to convert the moisture sensors alanog signal to a digital signal to be read by the raspberryPi. Follow the instructions [here](https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008) to install the Adafriut MCP3008 Python Library onto the raspberryPi.
+
+The Moisture-tool acts as a server and waits for moisture reading request. The Program running on the Moisture-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/lightToolServer.py) ADD MOISTURE CODE TOO GITHUB.
+To send a moisture reading request, use a remote computer connected to the same network, and run [this](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/remoteComputer/setLight.py) ADD CODE program.
+For example:
+```
+cd remoterComputer
+python moistureRequest.py
+``` 
+The Moisture-tool will return a number between 0 (dry) and 1024 (wet).
 
 ## Authors
 
