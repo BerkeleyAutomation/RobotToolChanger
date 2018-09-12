@@ -6,10 +6,13 @@ To examine the design we evaluated the tool changer on ABB YUMI, two-arm station
 
 
 ## Getting Started
+In this work we design and fabricated tool-changer and tools for collaborative and service robots.
+
+<!---
 This work was first published at [CASE-2018](http://ronberenstein.com/papers/CASE2018-Ron-Tool-Changer-Final.pdf). 
 This publication present the three main components needed to create a tool changer, robot, tool, and tool housing.
 Most of the component were 3D printed which may contributes to the adoption of the design.
-
+--->
 
 ## The tools
 For this case study we created 4 tools, camera, light, cutting, and moister sensor tool. 
