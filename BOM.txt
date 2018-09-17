@@ -1,0 +1,7 @@
+Part			Quantity		Price		Comments and URLs
+--------------------------------------------------------------------------------------------------------------
+camera			1			26$		https://www.amazon.com/gp/product/B0759GYR51/ref=oh_aui_search_detailpage?ie=UTF8&psc=1
+RaspberryPi zero w	1			10$		https://www.raspberrypi.org/products/raspberry-pi-zero-w/
+DC-DC convertor		1					24V --> 5V
+3mm inserts		4					https://www.amazon.com/uxcell-Female-Knurled-Threaded-Embedded/dp/B01IYWV9IC/ref=asc_df_B01IYWV9IC/?tag=hyprod-20&linkCode=df0&hvadid=198095726143&hvpos=1o5&hvnetw=g&hvrand=16913618634473114356&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032075&hvtargid=pla-318872285009&psc=1
+3mm bolt		4					L=8mm
