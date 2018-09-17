@@ -1,0 +1,11 @@
+Part			Quantity		Price		Comments and URLs
+--------------------------------------------------------------------------------------------------------------
+Spring			2					inner diameter => 8mm, L=~15mm
+Tension bolt		2					self manufactured
+Magnets			4			~15$		5x5mm, https://www.amazon.com/gp/product/B07CBN7SF5/ref=oh_aui_search_detailpage?ie=UTF8&psc=1
+Spring pin		2					diameter = 4mm
+Bearing			2					in D = 4, out D = 8, W = 3
+connector		1			~3$		https://www.mouser.com/datasheet/2/273/858-10-003-30-012000-1149118.pdf
+External retaining ring	2					for 8mm shaft
+
+
