@@ -1,12 +1,12 @@
 # Tool changer for robots
 In this work we developed a tool changer for robots. 
 With minor adjustments the tool changer design can be retrofit to most mobile and stationary robots.
-The project includes the design, manufacture, programing, and evaluation of a tool changer for robots. 
-To examine the design we evaluated the tool changer on ABB YUMI, two-arm stationary robot. 
+The project includes the design, manufacturing, programming, and evaluation of a tool changer for robots. 
+To examine the design we evaluated the tool changer on ABB YuMi, a two-arm stationary robot. 
 
 
 ## Getting Started
-In this work we design and fabricated tool-changer and tools for collaborative and service robots.
+In this work we designed and fabricated a tool-changer and tools for collaborative and service robots.
 
 <!---
 This work was first published at [CASE-2018](http://ronberenstein.com/papers/CASE2018-Ron-Tool-Changer-Final.pdf). 
@@ -15,11 +15,11 @@ Most of the component were 3D printed which may contributes to the adoption of t
 --->
 
 ## The tools
-For this case study we created 4 tools, camera, light, cutting, and moister sensor tool. 
-For each tool we provide the CAD design, the electrical drawing, and the program to control it.
+For this case study we created 4 tools: camera, light, cutting, and moister sensor tool. 
+For each tool we provide the CAD design, the electrical drawing, and the software to control it.
 
 A [raspberryPi zero w](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) is installed in each tool and is used as the main computing unit of the tool. 
-The connection of the tool with the remote computer is via WIFI. The robot should provide power (24v) to the tool.
+The connection of the tool with the remote computer is via WiFi. The robot should provide power (24v) to the tool.
 
 ### preparing the raspberryPi
 Before starting using the raspberryPi please follow the instructions [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up). 
