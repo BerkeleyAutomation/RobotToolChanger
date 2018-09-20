@@ -1,0 +1,10 @@
+Part			Quantity		Price		Comments and URLs
+--------------------------------------------------------------------------------------------------------------
+4mm bolt (flat head)	12					L=16mm, https://www.mcmaster.com/92855a416
+4mm bolt (flat head)	12					L=8mm, https://www.mcmaster.com/92855a408
+4mm nut (nylock)	18					https://www.mcmaster.com/94205a230
+3mm bolt 		2					L-60mm, https://www.mcmaster.com/91290A181
+3mm insert		1					L=6mm
+3mm bolt 		1					L=8mm
+90 Degree Angle							https://www.mcmaster.com/8982k56
+6061 Aluminum plate	1			45$		https://www.mcmaster.com/8975K142
