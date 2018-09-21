@@ -4,8 +4,6 @@ With minor adjustments the tool changer design can be retrofit to most mobile an
 The project includes the design, manufacturing, programming, and evaluation of a tool changer for robots. 
 To examine the design we evaluated the tool changer on ABB YuMi, a two-arm stationary robot. 
 
-![yumiwithtools2](https://user-images.githubusercontent.com/25335836/45852891-3102a100-bcf7-11e8-9fef-c71187efeb17.png =200x)
-
 ## Getting Started
 In this work we designed and fabricated a tool-changer and tools for collaborative and service robots.
 
