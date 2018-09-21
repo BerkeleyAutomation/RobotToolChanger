@@ -1,100 +1,39 @@
-# Tool changer for robots
-In this work we developed a tool changer for robots. 
-With minor adjustments the tool changer design can be retrofit to most mobile and stationary robots.
-The project includes the design, manufacturing, programming, and evaluation of a tool changer for robots. 
-To examine the design we evaluated the tool changer on ABB YuMi, a two-arm stationary robot. 
+# Tool-changer and tools for collaborative and service robots
+This repo include the design and software needed to create a tool-changer for collaborative and service robots.\
+The repo also include several tools that can be created and used with or without the tool-changer.
 
-## Getting Started
-In this work we designed and fabricated a tool-changer and tools for collaborative and service robots.
+The [tool-changer](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/tool-changer) is described in branch `tool-changer`, 
+which include the three main components of the tool-changer: robot component, tool-component, and tool-housing.
+
+The tool-changer was originally designed to be used with ABB YUMI collaborative robot.\
+With minor adjustments the tool-changer design can be retrofit to most mobile and stationary robots.\
+The project includes the design, manufacturing, programming, and evaluation of a tool-changer for robots.\
+To examine the design we evaluated the tool-changer on ABB YuMi, a two-arm stationary robot.
+
+![yumiwithtools2](https://user-images.githubusercontent.com/25335836/45905394-0ff88980-bda5-11e8-9efd-d0f7ab4f56cf.png)
 
 <!---
-This work was first published at [CASE-2018](http://ronberenstein.com/papers/CASE2018-Ron-Tool-Changer-Final.pdf). 
-This publication present the three main components needed to create a tool changer, robot, tool, and tool housing.
+The tool-changer mechanism was first published at [CASE-2018](http://ronberenstein.com/papers/CASE2018-Ron-Tool-Changer-Final.pdf) conference.\
+This publication present the three main components needed to create a tool-changer, robot, tool, and tool housing.\
 Most of the component were 3D printed which may contributes to the adoption of the design.
 --->
+## Getting Started
+The tool-changer and the different tools are organized in separate branches.\
+To get started with the tool-changer, open the `tool-changer` branch and follow instructions.\
+To manufacture a tool, open the tool branch and follow the design instructions and supplementary material (software, electrical drawings, etc.).       
 
-## The tools
-For this case study we created 4 tools: camera, light, cutting, and moister sensor tool. 
-For each tool we provide the CAD design, the electrical drawing, and the software to control it.
-
-A [raspberryPi zero w](https://www.raspberrypi.org/products/raspberry-pi-zero-w/) is installed in each tool and is used as the main computing unit of the tool. 
-The connection of the tool with the remote computer is via WiFi. The robot should provide power (24v) to the tool.
-
-### preparing the raspberryPi
-Before starting using the raspberryPi please follow the instructions [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up). 
-In this work we will use the NOOBS installer with **Raspbian**.
-
-After Raspbian is installed we will need to add the main program and the [reset button program](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/rebootUsingButton.py)
-to the raspberryPi autostart using crontab ([tip](https://raspberrypi.stackexchange.com/questions/8734/execute-script-on-start-up)).
-
-The tool and the remote computer **must** be connected to the same router, and are able to communicate (check using ping).
-Make sure the same network is used when the raspberryPi starts ([tip](https://raspi.tv/2017/how-to-auto-connect-your-raspberry-pi-to-a-hidden-ssid-wifi-network)).
-
-### Camera-tool
-The Camera-tool utilize a raspberryPi camera [PiCamera](http://a.co/cbe3Pey). 
-The camera is capable of capturing RGB and IR images.
-
-CAD design of the Camera-tool can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/CAD/Camera%20Tool),
-and electrical drawing [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/ElectricalDrawings).
-
-The Camera-tool acts as a server and wait for an image request. The Program running on the Camera-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/sendImageByRequest.py).
-To get an image from the Camera-tool we use a remote computer connected to the same network, and run [this](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/remoteComputer/imageRequest.py) program.
-For example:
-```
-cd remoterComputer
-python imageRequest.py
-``` 
-
-### Light-tool
-The Light-tool is used as a flashlight for the robot. For lightening we used three [LED's](https://www.amazon.com/BRIGHTEST-Light-Bolt-Interior-Motorcycle/dp/B01ADHUXGU/ref=sr_ph_1?ie=UTF8&qid=1534665958&sr=sr-1&keywords=led+11mm)
-installed facing inwards. The intensity of each LED can be controlled.
-
-CAD design of the Light-tool can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/CAD/Light%20Tool),
-and electrical drawing [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/ElectricalDrawings).
-
-The Light-tool acts as a server and wait for set light command. The Program running on the Light-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/lightToolServer.py).
-To set a light to the three LED's use a remote computer connected to the same network, and run [this](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/remoteComputer/setLight.py) program.
-For example:
-```
-cd remoterComputer
-python setLight.py
-``` 
-To set intensity light 1, 10, 99 to the corresponding right, middle, and left LED's, enter the following in the terminal:
-```
-setLight_001_010_099
-```
-
-### Cutting-tool
-The Cutting-tool uses a small diameter, rotation saw to cut miniature garden grass. We use a 24v, 9000RPM [motor](https://www.amazon.com/uxcell-9000RPM-Models-Remote-Control/dp/B0784W8HXF/ref=sr_1_12?ie=UTF8&qid=1534667758&sr=8-12&keywords=24v+motor+9000+rpm), 
-and a 30mm steel saw. The rotating direction and speed can be controlled using PWM. 
-
-CAD design of the Cutting-tool can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/CAD/Cutting%20Tool),
-and electrical drawing [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/supportingDocuments/ElectricalDrawings).
-
-The Cutting-tool acts as a server and wait for set speed command. The Program running on the Cutting-tool raspberryPi can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/master/cuttingToolServer.py).
-To set a motor speed we use a remote computer connected to the same network, and run [this](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/remoteComputer/setMotor.py) program.
-For example:
-```
-cd remoterComputer
-python setMotor.py
-``` 
-To set motor speed to 50% power, enter the following in the terminal:
-```
-setSpeed_000_050
-```
-where 000 is clockwise (001 is counterclockwise) and 050 is the 50% power.
+## Adding new tool
+To add new tool the developer will work on branch `new-tool`, and ask the contributors to do `pull-request`. 
 
 ## Authors
 
-* **Ron Berenstein** - [website](http://ronberenstein.com/index.html)
+**Ron Berenstein** - [website](http://ronberenstein.com/index.html)
 
 See also the list of [contributors](https://github.com/BerkeleyAutomation/RobotToolChanger/graphs/contributors) who participated in this project.
-
+<!---
 ## License
-
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
+--->
 ## Acknowledgments
-
 * [CITRIS invention lab](https://invent.citris-uc.org/)
 * Jacob Gallego from UC Berkeley machine shop
