@@ -15,7 +15,7 @@ The [camera housing cup](https://github.com/BerkeleyAutomation/RobotToolChanger/
 is connected to the [camera housing](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/cameraTool/STL/cameraHousing.STL) 
 by mounting inserts into the mounting holes on the camera housing and using m3\L=8 bolts (see image below).
 
-![untitled3](![insertscamera](https://user-images.githubusercontent.com/25335836/45913007-c11c1580-bddf-11e8-9b73-89216d163c97.png)
+![insertscamera](https://user-images.githubusercontent.com/25335836/45913393-7b168000-bde6-11e8-8bdf-d205d2842720.png)
 
 
 ## Hardware and software
