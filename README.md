@@ -1,4 +1,4 @@
-# Flashlight tool
+# Moisture sensor tool
 The moisture sensor tool is designed to allow the robot to measure soil moisture, a valuable indicator of a plant's irrigation state.\
 The measurement process involves penetrating the soil with a YL-60 moisture sensor, risking breaking or soiling the sensor tip.\
 To alleviate the risk, we positioned the moisture sensor at the end of a 110mm extension, and furthermore designed the sensor so it could be quickly replaced.\
