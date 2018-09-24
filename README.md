@@ -3,7 +3,7 @@ This repo include the design and software needed to create a tool-changer for co
 The repo also include several tools that can be created and used with or without the tool-changer.
 
 The [tool-changer](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/tool-changer) is described in branch `tool-changer`, 
-which include the three main components of the tool-changer: robot component, tool-component, and tool-housing.
+which include the three main components of the tool-changer: robot-component, tool-component, and tool-housing.
 
 The tool-changer was originally designed to be used with ABB YUMI collaborative robot.\
 With minor adjustments the tool-changer design can be retrofit to most mobile and stationary robots.\
