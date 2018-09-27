@@ -8,7 +8,8 @@ The cost of the camera tool is approximately \$40 (excluding 3D-printing).
 List of parts (BOM) can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/cameraTool/BOM.txt).\
 \
 \
-![untitled-7](https://user-images.githubusercontent.com/25335836/45912940-b319c500-bdde-11e8-9420-e353e10661d6.png)## Mechanics and 3D printing
+![untitled-7](https://user-images.githubusercontent.com/25335836/45912940-b319c500-bdde-11e8-9420-e353e10661d6.png)\
+\
 The body of the camera tool was 3D printed using Ultimaker 3D printer while using 0.6mm nozzle.\
 CAD (Solidworks) and STL files can be found [here](https://github.com/BerkeleyAutomation/RobotToolChanger/tree/cameraTool).\
 The [camera housing cup](https://github.com/BerkeleyAutomation/RobotToolChanger/blob/cameraTool/STL/cameraHousing%20cup.STL) 
